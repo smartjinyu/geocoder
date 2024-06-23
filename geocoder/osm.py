@@ -321,6 +321,10 @@ class OsmQuery(MultipleResultsQuery):
     _RESULT_CLASS = OsmResult
     _KEY_MANDATORY = False
 
+    def _build_headers(self, provider_key, **kwargs):
+        """Will be overridden according to the targetted web service"""
+        return {'User-agent': 'geocoder-converter'}
+
     def _build_params(self, location, provider_key, **kwargs):
         # backward compatitibility for 'limit' (now maxRows)
         if 'limit' in kwargs:
@@ -362,6 +366,10 @@ class OsmQueryDetail(MultipleResultsQuery):
     _URL = 'https://nominatim.openstreetmap.org/search'
     _RESULT_CLASS = OsmResult
     _KEY_MANDATORY = False
+
+    def _build_headers(self, provider_key, **kwargs):
+        """Will be overridden according to the targetted web service"""
+        return {'User-agent': 'geocoder-converter'}
 
     def _build_params(self, location, provider_key, **kwargs):
         # backward compatitibility for 'limit' (now maxRows)
